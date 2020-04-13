@@ -14,7 +14,7 @@ To setup:
 - Create your database using the sql file structure
 - Add a line for your shop/supermarket in table Shop leaving email_verified as 0
 e.g. # id, name, address, comments, email, max_per_slot, mon_alpha_csv, tue_alpha_csv, wed_alpha_csv, thu_alpha_csv, fri_alpha_csv, sat_alpha_csv, sun_alpha_csv, open_time, close_time, key, email_verified, slot_duration_min
-'1', 'Winners Rose Belle', 'Rose Belle', '', 'dvdoolub@gmail.com', '30', 'A,B,C,D,E,F,G,H', 'I,J,K,L,M,N,O,P', 'Q,R,S,T,U,V,W,X,Y,Z', 'A,B,C,D,E,F,G,H', 'I,J,K,L,M,N,O,P', 'Q,R,S,T,U,V,W,X,Y,Z', '', '09:00:00', '17:00:00', 'IUHDjsdhnlkfjhsoifuw9a8e70593849iu43u8rt894h304', '0', '30'
+'1', 'Winners Rose Belle', 'Rose Belle', '', 'w@gmail.com', '30', 'A,B,C,D,E,F,G,H', 'I,J,K,L,M,N,O,P', 'Q,R,S,T,U,V,W,X,Y,Z', 'A,B,C,D,E,F,G,H', 'I,J,K,L,M,N,O,P', 'Q,R,S,T,U,V,W,X,Y,Z', '', '09:00:00', '17:00:00', 'IUHDjsdhnlkfjhsoifuw9a8e70593849iu43u8rt894h304', '0', '30'
 - Configure config/*php files
 - Configure database, email account, timezone, email smtp settings
 - Point domain or subdomain to the root directory/web dir
