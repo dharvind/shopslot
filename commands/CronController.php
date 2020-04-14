@@ -39,11 +39,11 @@ class CronController extends Controller
     public function actionInactivateTimeslots() {
         $ts = new \DateTime('now', new \DateTimeZone(Yii::$app->params['timezone']));
         $ts_time = $ts->format('Y-m-d H:i');
-        $activeSlots = Timeslot::find()->where(['status' => 'active'])->andWhere('end_timestamp < "'.$ts_time.'"')->all();
+        $activeSlots = Timeslot::find()->where('end_timestamp < "'.$ts_time.'"')->all();
         foreach ($activeSlots as $slot) {
             $slot->status='inactive';
             $slot->save();
-            $activeTickets = Ticket::find()->where(['timeslot_id' => $slot['id'] ])->andWhere(['status' => 'active'])->all();
+            $activeTickets = Ticket::find()->where(['timeslot_id' => $slot['id'] ])->all();
             foreach ($activeTickets as $ticket) {
                 $ticket->status='inactive';
                 $ticket->save();
