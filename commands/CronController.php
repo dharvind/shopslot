@@ -37,7 +37,9 @@ class CronController extends Controller
      * Run once every 5 minutes to inactivate expired records by time
      */
     public function actionInactivateTimeslots() {
-        $activeSlots = Timeslot::find()->where(['status' => 'active'])->andWhere('end_timestamp < CONVERT_TZ(NOW(),"SYSTEM","'.Yii::$app->params['tzmysql'].'")')->all();
+        $ts = new \DateTime('now', new \DateTimeZone(Yii::$app->params['timezone']));
+        $ts_time = $ts->format('Y-m-d H:i');
+        $activeSlots = Timeslot::find()->where(['status' => 'active'])->andWhere('end_timestamp < "'.$ts_time.'"')->all();
         foreach ($activeSlots as $slot) {
             $slot->status='inactive';
             $slot->save();
