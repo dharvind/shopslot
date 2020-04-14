@@ -165,42 +165,56 @@ class TicketController extends Controller
     {
         $model = new Ticket();
         $model->timeslot_id = $timeslot;
-        if ($model->load(Yii::$app->request->post())) {
-            // 'id' => 'ID',
-            // 'key' => 'Key',
-            // 'qr' => 'Qr',
-            // 'surname' => 'Surname',
-            // 'nic' => 'NIC',
-            // 'email' => 'Email',
-            // 'status' => 'Status',
-            // 'timeslot_id' => 'Timeslot',
-            // 'email_verified' => 'Email Verified',
-            $model->key = Yii::$app->getSecurity()->generateRandomString();
-            $model->status = 'pending';
-            $model->email_verified=0;
-            if( $model->surnameIsAllowed() ) {
-                if($model->save()) {
-                    $body='<html xmlns="http://www.w3.org/1999/xhtml"><head></head><body>';
-                    $body.='<h3>'.$model->getSubject().'</h3>';
-                    $body.='<p>'.'<a href="'.$model->getVerificationLink().'">Click here to complete booking</a>'.'</p>';
-                    $body.='</body></html>';
-                    Yii::$app->mailer->compose()
-                    ->setFrom(Yii::$app->params['adminEmail'])
-                    ->setTo($model->email)
-                    ->setSubject($model->getSubject())
-                    ->setHtmlBody($body)
-                    ->send();
-                    return $this->redirect(['check', 'id' => $model->id]);
+
+        $ts = Timeslot::findOne($model->timeslot_id);
+
+        if($ts->status=='active') {
+
+            if ($model->load(Yii::$app->request->post())) {
+                // 'id' => 'ID',
+                // 'key' => 'Key',
+                // 'qr' => 'Qr',
+                // 'surname' => 'Surname',
+                // 'nic' => 'NIC',
+                // 'email' => 'Email',
+                // 'status' => 'Status',
+                // 'timeslot_id' => 'Timeslot',
+                // 'email_verified' => 'Email Verified',
+                $model->key = Yii::$app->getSecurity()->generateRandomString();
+                $model->status = 'pending';
+                $model->email_verified=0;
+                if( $model->surnameIsAllowed() ) {
+                    if($model->save()) {
+                        $body='<html xmlns="http://www.w3.org/1999/xhtml"><head></head><body>';
+                        $body.='<h3>'.$model->getSubject().'</h3>';
+                        $body.='<p>'.'<a href="'.$model->getVerificationLink().'">Click here to complete booking</a>'.'</p>';
+                        $body.='</body></html>';
+                        Yii::$app->mailer->compose()
+                        ->setFrom(Yii::$app->params['adminEmail'])
+                        ->setTo($model->email)
+                        ->setSubject($model->getSubject())
+                        ->setHtmlBody($body)
+                        ->send();
+                        return $this->redirect(['check', 'id' => $model->id]);
+                    }
+                }
+                else {
+                    return $this->render('notallowed', [
+                        'msg' => 'Your Surname is not configured for this timeslot. Please try another one.'
+                    ]);
                 }
             }
-            else {
-                return $this->redirect(['not-allowed', 'id' => $model->id]);
-            }
+
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        }
+        else {
+            return $this->render('notallowed', [
+                'msg' => 'Expired timeslot'
+            ]);
         }
 
-        return $this->render('create', [
-            'model' => $model,
-        ]);
     }
 
 

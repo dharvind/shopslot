@@ -12,7 +12,8 @@ $this->title = 'Not Allowed';
 ?>
 <div class="ticket-view">
 
-    <h3>Not Allowed! Your Surname is not configured for this timeslot. Please try another one.</h3>
+    <h3>Not Allowed! <h3>
+    <h4><?= $msg ?></h4>
 
 
 </div>
