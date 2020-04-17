@@ -31,35 +31,6 @@ class TicketController extends Controller
         ];
     }
 
-    /**
-     * Lists all Ticket models.
-     * @return mixed
-     */
-    public function actionIndex()
-    {
-        // $searchModel = new TicketSearch();
-        // $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-        // $dataProvider->pagination->pageSize=50;
-
-        // return $this->render('index', [
-        //     'searchModel' => $searchModel,
-        //     'dataProvider' => $dataProvider,
-        // ]);
-    }
-
-    /**
-     * Displays a single Ticket model.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionView($id)
-    {
-        // return $this->render('view', [
-        //     'model' => $this->findModel($id),
-        // ]);
-    }
-
     public function actionCheck($id)
     {
         return $this->render('check', [
@@ -138,25 +109,6 @@ class TicketController extends Controller
     }
 
     /**
-     * Creates a new Ticket model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
-     */
-    public function actionCreate()
-    {
-        // $model = new Ticket();
-
-        // if ($model->load(Yii::$app->request->post()) && $model->save()) {
-        //     return $this->redirect(['view', 'id' => $model->id]);
-        // }
-
-        // return $this->render('create', [
-        //     'model' => $model,
-        // ]);
-    }
-
-
-    /**
      * Book a new Ticket model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
@@ -171,15 +123,6 @@ class TicketController extends Controller
         if($ts->status=='active') {
 
             if ($model->load(Yii::$app->request->post())) {
-                // 'id' => 'ID',
-                // 'key' => 'Key',
-                // 'qr' => 'Qr',
-                // 'surname' => 'Surname',
-                // 'nic' => 'NIC',
-                // 'email' => 'Email',
-                // 'status' => 'Status',
-                // 'timeslot_id' => 'Timeslot',
-                // 'email_verified' => 'Email Verified',
                 $model->key = Yii::$app->getSecurity()->generateRandomString();
                 $model->status = 'pending';
                 $model->email_verified=0;
@@ -216,28 +159,6 @@ class TicketController extends Controller
         }
 
     }
-
-
-    /**
-     * Updates an existing Ticket model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionUpdate($id)
-    {
-        $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
-    }
-
 
     /**
      * Finds the Ticket model based on its primary key value.

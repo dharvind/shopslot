@@ -44,19 +44,6 @@ class TimeslotController extends Controller
         ]);
     }
 
-    /**
-     * Displays a single Timeslot model.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
-    public function actionView($id)
-    {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
-    }
-
 
     /**
      * Finds the Timeslot model based on its primary key value.
