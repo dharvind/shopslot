@@ -20,7 +20,7 @@ e.g. # id, name, address, comments, email, max_per_slot, mon_alpha_csv, tue_alph
 - Configure database, email account, timezone, email smtp settings
 - Point domain or subdomain to the root directory/web dir
 - Configure cron job in commands directory as 
-0 0 * * * /usr/local/bin/php /home/whereyourrootdiris/shopslot/yii cron/generate-next-timeslots >/dev/null 2>&1
+0 0 * * * /usr/local/bin/php /home/whereyourrootdiris/shoppingslot/yii cron/generate-next-timeslots >/dev/null 2>&1
 Refer to the comments in the commands directory.
 
 Project has been developed with Yii2 PHP Framework.
