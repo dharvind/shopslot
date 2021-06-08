@@ -1,5 +1,5 @@
-# shoppingslot
-ShoppingSlot aims to be a quick ticketing solution for supermarkets (following COVID-19 situation in 2020).
+# shopslot
+Shoplot aims to be a quick ticketing solution for supermarkets (following COVID-19 situation in 2020).
 Released as open source on Github.
 
 In short, since COVID-19 lockdowns and supermarkets' queues overflowing with people which increases risks of contagion and waiting time, this project can be used by e.g. supermarkets to allow the public to obtain a ticket for a timeslot at the supermarket. This hopefully can help to allow presence of a maximum number of people in the supermarket during one timeslot.
